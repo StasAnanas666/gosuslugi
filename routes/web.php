@@ -1,18 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\AdminController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/', [ServiceController::class, 'index']) -> name('home');
+// Route::get('/contacts', ContactController::class);
+// Route::get('/book-service', BookingController::class);
+// Route::get('/reviews', ReviewController::class);
+Route::get('/admin', [AdminController::class, 'index']) -> name('admin');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::post('/services', [ServiceController::class, 'store']) -> name('services.store');
