@@ -2,13 +2,12 @@
 
 @section('content')
     <div class="container">
-        <form class="my-5" action="{{route('services.store')}}" method="post">
-            <div class="form-group">
-                <label for="name" class="form-label">Название услуги: </label>
-                <input type="text" class="form-control" id="name" name="name">
-            </div>
-            <button type="submit" class="btn btn-primary my-3">Добавить услугу</button>
-        </form>
+        {{ html()->form('POST', 'add_service')->class('my-5')->open() }}
+        <div class="form-group">
+            {{ html()->text('name')->class('form-control')->placeholder('Название услуги') }}
+            {{ html()->input()->class('btn btn-primary my-3')->type('submit')->value('Добавить услугу') }}
+        </div>
+        {{ html()->form()->close() }}
     </div>
 
 @endsection
