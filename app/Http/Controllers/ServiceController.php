@@ -14,17 +14,16 @@ class ServiceController extends Controller
     }
 
     function store(Request $request):RedirectResponse {
-        $request->validate([
-            'name' => 'required|string',
-            'image' => 'image|mimes: jpg, jpeg, png, webp',
-            'price' => 'numeric',
-            'description' => 'string'
-        ]);
 
         $imagePath = null;
         if($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('services', 'public');
+            $image = $request->file('image');
+            $imageName = time().'_'.$image->getClientOriginalName();
+            $imagePath = $image->storeAs('images', $imageName, 'public');
         }
+
+        // $imagePath = $request->file('image');
+        // $imagePath->move(base_path('images'), $imagePath->getClientOriginalName());
 
         $service = new Service;
         $service->name = $request->name;
@@ -33,7 +32,7 @@ class ServiceController extends Controller
         $service->description = $request->description;
 
         $service->save();
-        
+
         return redirect('/')->with('success', 'Услуга успешно добавлена.');
     }
 }
