@@ -18,24 +18,24 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav m-auto mb-2 mb-lg-0 w-50 d-flex justify-content-between">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{route('home')}}">Home</a>
+                            <a class="nav-link {{request()->routeIs('home') ? 'active' : ''}}" aria-current="page" href="{{route('home')}}">Домой</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contacts</a>
+                            <a class="nav-link" href="#">Контакты</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Book Service</a>
+                            <a class="nav-link" href="#">Заказать услугу</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Reviews</a>
+                            <a class="nav-link" href="#">Отзывы</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin')}}">Admin</a>
+                            <a class="nav-link {{request()->routeIs('admin') ? 'active' : ''}}" href="{{route('admin')}}">Админка</a>
                         </li>
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">Search</button>
+                        <button class="btn btn-outline-light" type="submit">Найти</button>
                     </form>
                 </div>
             </div>
