@@ -9,7 +9,8 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [ServiceController::class, 'index']) -> name('home');
 // Route::get('/contacts', ContactController::class);
-// Route::get('/book-service', BookingController::class);
+Route::get('/order-service/{service?}', [ServiceController::class, 'order']) -> name('order_service');
+Route::get('/orderPage', [ServiceController::class, 'orderPage']) -> name('order_page');
 // Route::get('/reviews', ReviewController::class);
 Route::get('/admin', [AdminController::class, 'index']) -> name('admin');
 

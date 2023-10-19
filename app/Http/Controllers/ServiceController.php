@@ -35,4 +35,13 @@ class ServiceController extends Controller
 
         return redirect('/')->with('success', 'Услуга успешно добавлена.');
     }
+
+    public function orderPage() {
+        return view('orders.orders');
+    }
+
+    public function order(Service $service) {
+        session(['selected-service' => $service]);
+        return redirect(route('order_page'));
+    }
 }

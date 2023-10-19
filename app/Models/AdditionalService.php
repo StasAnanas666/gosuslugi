@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class AdditionalService extends Model
 {
     use HasFactory;
-    public function additionalServices() {
-        return $this->hasMany(AdditionalService::class);
+    public function service() {
+        return $this->belongsTo(Service::class);
     }
 }

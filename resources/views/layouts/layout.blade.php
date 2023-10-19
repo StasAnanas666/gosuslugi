@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uslugi</title>
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/styles.css')}}">
 </head>
 <body>
     <div class="container-fluid-">
@@ -24,7 +25,7 @@
                             <a class="nav-link" href="#">Контакты</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Заказать услугу</a>
+                            <a class="nav-link nav-link {{request()->routeIs('order_page') ? 'active' : ''}}" href="{{route('order_page')}}">Оформление заказа</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Отзывы</a>
