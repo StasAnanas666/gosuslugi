@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Service;
+use App\Models\AdditionalService;
 
 class ServiceController extends Controller
 {
@@ -42,6 +43,9 @@ class ServiceController extends Controller
 
     public function order(Service $service) {
         session(['selected-service' => $service]);
+        $additionalService = $service->additionalServices;
+        session(['additional-service' => $additionalService]);
+        
         return redirect(route('order_page'));
     }
 }
