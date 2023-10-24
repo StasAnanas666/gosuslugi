@@ -1,10 +1,10 @@
 @extends('layouts.layout')
 
 @section('content')
-    <a href="{{route('home')}}" class="nav-link">Назад к списку услуг</a>
     
 
     <div class="container">
+    <a href="{{route('home')}}" class="nav-link my-4">Назад к списку услуг</a>
         <h1 class="mb-3">Оформление заказа</h1>
         @if(session()->has('selected-service'))
             @php
@@ -40,27 +40,30 @@
             @endif
             <h3 class="mt-4">Общая сумма заказа: <span id="total-price"></span> рублей</h3>
             <button class="btn btn-primary mt-5">Оформить заказ</button>
+
+            <script>
+                function calculateTotalPrice() {
+                    var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                    
+                    var total = parseFloat("{{$service->price}}");
+
+                    checkboxes.forEach(checkbox => {
+                        total += parseFloat(checkbox.value);
+                    })
+                    document.querySelector("#total-price").textContent = total;
+                }
+
+                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', calculateTotalPrice);
+                })
+
+                calculateTotalPrice();
+            </script>
         @else
             <p>Выберите услугу для заказа.</p>
         @endif
     </div>
-    <script>
-        function calculateTotalPrice() {
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            var total = parseFloat("{{$service->price}}");
-
-            checkboxes.forEach(checkbox => {
-                total += parseFloat(checkbox.value);
-            })
-            document.querySelector("#total-price").textContent = total;
-        }
-
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', calculateTotalPrice);
-        })
-
-        calculateTotalPrice();
-    </script>
+    
 
 @endsection

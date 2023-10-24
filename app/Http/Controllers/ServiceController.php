@@ -9,6 +9,11 @@ use App\Models\AdditionalService;
 
 class ServiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     function index() {
         $services = Service::all();
         return view('services.services', compact('services'));
@@ -34,7 +39,7 @@ class ServiceController extends Controller
 
         $service->save();
 
-        return redirect('/')->with('success', 'Услуга успешно добавлена.');
+        return redirect('/home')->with('success', 'Услуга успешно добавлена.');
     }
 
     public function orderPage() {
