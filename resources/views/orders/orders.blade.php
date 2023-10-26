@@ -25,8 +25,7 @@
                     $additionalServices = session('additional-service');
                 @endphp
                 @if(count($additionalServices) > 0)
-                    <form method="post">
-                        <h3>Выберите дополнительные услуги</h3>
+                        <h3 class="mt-3">Выберите дополнительные услуги</h3>
                         <ul class="list-group">
                             @foreach($additionalServices as $additionalService)
                                 <li class="list-group-item">
@@ -35,12 +34,16 @@
                                 </li>
                             @endforeach
                         </ul>
-                    </form>
                 @endif
             @endif
-            <h3 class="mt-4">Общая сумма заказа: <span id="total-price"></span> рублей</h3>
-            <button class="btn btn-primary mt-5">Оформить заказ</button>
-
+            <form action="{{route('save_order')}}" method="post">
+                @csrf
+                <input type="hidden" name="total_price" id="total_price" >
+                <h3 class="mt-4">Общая сумма заказа: <span id="total-price"></span> рублей</h3>
+                <button type="submit" class="btn btn-primary mt-5">Оформить заказ</button>
+            </form>
+            
+            
             <script>
                 function calculateTotalPrice() {
                     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -51,6 +54,7 @@
                         total += parseFloat(checkbox.value);
                     })
                     document.querySelector("#total-price").textContent = total;
+                    document.querySelector("#total_price").value = total;
                 }
 
                 var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -58,6 +62,7 @@
                     checkbox.addEventListener('change', calculateTotalPrice);
                 })
 
+                document.querySelector("#total_price").value = calculateTotalPrice();
                 calculateTotalPrice();
             </script>
         @else

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Service;
 use App\Models\AdditionalService;
+use App\Models\Order;
 
 class ServiceController extends Controller
 {
@@ -52,5 +55,23 @@ class ServiceController extends Controller
         session(['additional-service' => $additionalService]);
         
         return redirect(route('order_page'));
+    }
+
+    public function save(Request $request):RedirectResponse {
+        $userId = Auth::id();
+
+        $order = new Order;
+        $order->user_id = $userId;
+        $order->total_price = $request->input('total_price');
+        $order->order_date = Carbon::now('Europe/Moscow');;
+        $order->status = "Оформлен";
+        // $order = Order::create([
+        //     'user_id' => $userId,
+        //     'total_price' => $request->input('total_price'),
+        //     'status' => 'Оформлен'
+        // ]);
+        $order->save();
+        
+        return redirect()->route('home');
     }
 }

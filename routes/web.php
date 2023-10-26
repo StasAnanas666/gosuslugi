@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserDashboardController;
 
 Route::get('/home', [ServiceController::class, 'index']) -> name('home');
 // Route::get('/contacts', ContactController::class);
@@ -17,6 +18,8 @@ Route::get('/dashboard', [UserDashboardController::class, 'dashboard']) -> name(
 
 
 Route::post('/add_service', [ServiceController::class, 'store']) -> name('add_service');
+Route::post('/saveOrder', [ServiceController::class, 'save']) -> name('save_order');
+
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
