@@ -36,6 +36,7 @@
                         </ul>
                 @endif
             @endif
+
             <form action="{{route('save_order')}}" method="post">
                 @csrf
                 <input type="hidden" name="total_price" id="total_price" >

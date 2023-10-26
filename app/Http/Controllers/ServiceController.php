@@ -60,17 +60,15 @@ class ServiceController extends Controller
     public function save(Request $request):RedirectResponse {
         $userId = Auth::id();
 
-        $order = new Order;
-        $order->user_id = $userId;
-        $order->total_price = $request->input('total_price');
-        $order->order_date = Carbon::now('Europe/Moscow');;
-        $order->status = "Оформлен";
-        // $order = Order::create([
-        //     'user_id' => $userId,
-        //     'total_price' => $request->input('total_price'),
-        //     'status' => 'Оформлен'
-        // ]);
-        $order->save();
+        $order = Order::create([
+            'user_id' => $userId,
+            'total_price' => $request->input('total_price'),
+            'order_date' => Carbon::now('Europe/Moscow'),
+            'status' => 'Оформлен'
+        ]);
+        // dd($order);
+        session()->forget('selected-service');
+        session()->forget('additional-service');
         
         return redirect()->route('home');
     }
